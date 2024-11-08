@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register - Goldencat Bank</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5; /* Fond beige cassé */
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar-custom {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .navbar-custom a {
+            color: #ffffff !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+            color: #ffd700;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 450px;
+            padding: 30px;
+            background-color: #fff9e6; /* Fond beige cassé pour le formulaire */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #555555;
+            text-align: left;
+            display: block;
+        }
+
+        .form-group input {
+            border: 1px solid #ffd700;
+            background-color: #f7f7f7;
+            color: #333333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #ffd700;
+            border: none;
+            color: black;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #ffc700;
+        }
+
+        .custom-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .custom-link:hover {
+            color: #ffecb3;
+            text-decoration: underline;
+        }
+
+        .footer {
+            display: none; /* Suppression de la section de bas de page */
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="#">Goldencat Bank</a>
+</nav>
+
+<div class="container">
+    <h2 class="text-center">Register a New Account</h2>
+    <form method="post" action="/register">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" class="form-control" name="username" required />
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-block">Register</button>
+    </form>
+    <p class="text-center mt-3">Already have an account? <a href="/login" class="custom-link">Login here</a></p>
+
+    <div th:if="${error}" class="alert alert-danger mt-3 text-center">
+        User already present.
+    </div>
+</div>
+
+</body>
+</html>

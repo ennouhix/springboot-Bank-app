@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transaction History - Goldencat Bank</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f5f0; /* Blanc cassé */
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .navbar-custom {
+            background-color: #333333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-custom a {
+            color: #f8f5f0 !important;
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 100px; /* Spacing from top for better visibility */
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #555555;
+        }
+
+        .table-custom {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f1f1f1; /* Light grey for alternate rows */
+        }
+
+        .table-striped td, .table-striped th {
+            color: #555555;
+            font-weight: 500;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table-striped th {
+            background-color: #f8f5f0;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        .text-success {
+            color: #28a745 !important;
+        }
+
+        .text-danger {
+            color: #dc3545 !important;
+        }
+
+        .custom-link {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .custom-link:hover {
+            color: #c5a02c;
+            text-decoration: underline;
+        }
+
+        /* Additional styling for hover effects */
+        tbody tr:hover {
+            background-color: #f0eade; /* Soft highlight on row hover */
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="#">Goldencat Bank</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/transactions">Transactions</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2 class="text-center">Transaction History</h2>
+    <div class="table-responsive table-custom">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.id}"></td>
+                <td th:text="${transaction.type}"></td>
+                <td th:text="${transaction.amount}"
+                    th:classappend="${transaction.type.contains('Transfer In') || transaction.type == 'Deposit'} ? 'text-success' : 'text-danger'">
+                    <span th:text="${transaction.type.contains('Transfer In') || transaction.type == 'Deposit'} ? '+$' + transaction.amount : '-$' + transaction.amount"></span>
+                </td>
+                <td th:text="${transaction.timestamp}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="text-center"><a href="/dashboard" class="custom-link">Back to Dashboard</a></p>
+</div>
+
+</body>
+</html>

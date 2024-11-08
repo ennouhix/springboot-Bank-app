@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Goldencat Bank</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f5f2; /* Blanc cassé élégant */
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar-custom {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Centre le texte */
+        }
+
+        .navbar-custom .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 450px;
+            padding: 30px;
+            background-color: #ffffff; /* Fond blanc */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+        }
+
+        .container h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #555555;
+            text-align: left;
+            display: block;
+        }
+
+        .form-group input {
+            border: 1px solid #cccccc;
+            background-color: #f8f5f2; /* Fond blanc cassé */
+            color: #333333;
+        }
+
+        .btn {
+            background-color: #ffcc00; /* Jaune doré */
+            border: none;
+            color: black;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ffb700; /* Jaune plus foncé */
+        }
+
+        .custom-link {
+            color: #ffcc00; /* Jaune doré */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .custom-link:hover {
+            color: #ffb700;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="#">Goldencat Bank</a>
+</nav>
+
+<div class="container">
+    <h2 class="text-center">Login</h2>
+    <form method="post" action="/login">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" class="form-control" name="username" required />
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-block">Login</button>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a href="/register" class="custom-link">Register here</a></p>
+
+    <div th:if="${param.error}" class="alert alert-danger mt-3 text-center">
+        Invalid username or password.
+    </div>
+</div>
+</body>
+</html>
